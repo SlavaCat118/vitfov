@@ -89,10 +89,10 @@ class LineSource(Component):
 
 	def translate(self):
 
-		base = super().translate()
-		return base | {
+		base = super().translate() | {
 			"num_points":len(self.keyframes)
 		}
+		return base 
 
 class AudioSource(Component):
 

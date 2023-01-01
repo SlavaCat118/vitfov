@@ -85,6 +85,7 @@ class Sample(Container):
 		self.sample_rate = 44100
 
 	def receive(self, params):
+		super().receive(params)
 		self.name = params.pop("name", self.name)
 		self.samples = params.pop("samples", self.samples)
 		self.length = params.pop("length", self.length)

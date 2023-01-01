@@ -182,20 +182,23 @@ class Filter(Container):
 		# The upper model limit is relative to the number of filter styles in a model
 		# So this set function is necessary to update that value each ".set()"
 
-		if type(model) == int:
+		if type(model) in [int, float]:
 			self.params["model"] = model
-			self.lookup["style"][1] = len(self.filter_types[self.filter_models[model]]) - 1
+			self.lookup["style"][1] = len(self.filter_types[self.filter_models[int(model)]]) - 1
+
 		elif type(model) == str:
-			self.params["model"] = model
-			self.lookup["style"][1] = len(self.filter_types[model]) - 1
+			self.params["model"] = self.filter_models.index(model)
+			self.lookup["style"][1] = len(self.filter_types[int(model)]) - 1
 
 		if self.is_valid("style") is False:
 			self.params["style"] = self.upper("style")
 
+		print(model, self.get("model"))
+
+
 	def set(self, param, value):
 		# This makes working with filters consistent with the rest of the containers
 		# Split into two methods to help with organization and separation 
-
 		if param == "model":
 			self.set_model(value)
 		else:
