@@ -1,5 +1,6 @@
 # What is ViTFoV?
 Vitfov (Vital Tools for Vital) is a python package for splitting Vital preset files into workable objects. Parameters can then be modified and objects recombined to form a new preset. As a bonus, each object suports full randomization of parameters.
+
 Vitfov splits presets into the following heirarchy:
 - Preset
   - Info
