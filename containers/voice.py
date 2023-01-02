@@ -5,7 +5,6 @@ from vitfov.containers.wavetable import Wavetable
 class Voice(Container):
 
 	def __init__(self, num=0, wavetable=None):
-		
 		self.num = num
 		self.lookup = {
 			"destination":[0.0, 5.0, 0.0],
@@ -39,7 +38,6 @@ class Voice(Container):
 			"view_2d":[0.0, 2.0, 1.0],
 			"wave_frame":[0.0, 256, 0.0]
 		}
-
 		self.wavetable = Wavetable() if wavetable is None else wavetable
 		super().__init__(lookup=self.lookup, prefix="osc_"+str(self.num)+"_")
 

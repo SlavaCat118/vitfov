@@ -11,7 +11,6 @@ class Settings(object):
 				info=None, lfos=None, warps=None, matrix_ports=None,
 				matrix_wires=None, randoms=None, voices=None,
 				sample=None, random_seeds=None):
-
 		self.advanced = containers.Advanced() if advanced is None else advanced
 		self.effects = containers.Effects() if advanced is None else advanced
 		self.envelopes = [containers.Envelope(i+1) for i in range(6)] if advanced is None else advanced
@@ -36,7 +35,6 @@ class Settings(object):
 			*self.custom_warps,
 			*self.random_seeds
 		]
-
 	def randomize(self, keys=None, exclude=None):
 		loopthrough = utility.get_loopthrough(keys, exclude, self.settings)
 		for i in loopthrough:
@@ -44,7 +42,7 @@ class Settings(object):
 				i["seed"] = random.uniform(0,999.9)
 			else:
 				i.randomize()
-
+				
 	def initialize(self, keys=None, exclude=None):
 		loopthrough = utility.get_loopthrough(keys, exclude, self.settings)
 		for i in loopthrough:

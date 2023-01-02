@@ -6,7 +6,6 @@ from vitfov.containers.container import Container
 class Lfo(Container):
 
 	def __init__(self, num=0, name = "none", points=None, powers=None, prefix="lfo_"):
-
 		self.num = num
 		self.points = [] if points is None else points # 0 -> 1
 		self.powers = [] if powers is None else powers # -10 -> 10
@@ -26,7 +25,6 @@ class Lfo(Container):
 			"keytrack_transpose": [-60.0, 36.0, -12.0],
 			"keytrack_tune": [-1.0, 1.0, 0.0]
 		}
-
 		super().__init__(self.lookup, prefix + str(self.num) + "_")
 
 	def __str__(self):
@@ -41,15 +39,13 @@ class Lfo(Container):
 				x_points = [round(i/num_points, vitfov_const.float_res) for i in range(num_points)] + [1]
 			else:
 				x_points = sorted([0.0] + [round(random.uniform(0.0,1.0), vitfov_const.float_res) for i in range(num_points-2)]+[1.0])
+
 			y_points = [round(random.uniform(0.0,1.0), vitfov_const.float_res) for i in range(num_points)]
 			y_points.append(y_points[0])
-	
-
 			points = list(zip(x_points, y_points))
 			new = []
 			for i in points:
 				new += list(i)
-
 			self.points = new
 
 		powers = self.powers
@@ -61,14 +57,12 @@ class Lfo(Container):
 
 	def initialize(self):
 		super().initialize()
-
 		self.points = [0.0,1.0,0.5,0.0,1.0,1.0]
 		self.powers = [0.0,0.0,0.0]
 		self.smooth = False
 		self.name = "Triangle"
 
 	def set_points(self, points, fix_powers=True):
-
 		self.points = points
 		if fix_powers is True:
 			self.powers = [0]*(len(points)//2)

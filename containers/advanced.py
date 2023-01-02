@@ -3,7 +3,6 @@ from vitfov.containers.container import Container
 class Advanced(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"beats_per_minute":[0.333,999.9,2],
 			"bypass":[0.0,1.0,0.0, True],
@@ -34,7 +33,6 @@ class Advanced(Container):
 			"voice_tune":[-1.0, 1.0, 0.0],
 			"volume":[0.0, 7399.4404, 5473.0404]
 		}
-
 		super().__init__(self.lookup)
 
 	def randomize(self, keys=None, exclude=["bypass","volume",

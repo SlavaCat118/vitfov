@@ -4,7 +4,6 @@ from vitfov.containers.settings import Settings
 class Preset(object):
 
 	def __init__(self, info=None, settings=None):
-
 		self.settings = Settings() if settings is None else settings
 		self.info = Info() if info is None else info
 

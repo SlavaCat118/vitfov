@@ -1,11 +1,9 @@
 from vitfov import utility
-
 from vitfov.containers.container import Container
 
 class Effects(object):
 
 	def __init__(self):
-
 		self.chorus = Chorus()
 		self.compressor = Compressor()
 		self.delay = Delay()
@@ -16,7 +14,6 @@ class Effects(object):
 		self.reverb = Reverb()
 		self.filters = [Filter("1"), Filter("2")]
 		self.filter_fx = FilterFx()
-
 		self.effects = [
 			self.chorus,
 			self.compressor,
@@ -34,7 +31,6 @@ class Effects(object):
 		for effect in self.effects:
 			string += type(effect).__name__ + " : " + str(effect) + ("\n"*2)
 		return string
-
 
 	def initialize(self, keys=None, exclude=None):
 		loopthrough = utility.get_loopthrough(keys, exclude, self.effects)
@@ -55,7 +51,6 @@ class Effects(object):
 class Chorus(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"cutoff": [8.0, 136.0, 60.0],
 			"delay_1": [-10.0, -5.64386, -9.0],
@@ -70,13 +65,11 @@ class Chorus(Container):
 			"tempo": [0.0, 10.0, 4.0],
 			"voices": [1.0, 4.0, 4.0],
 		}
-
 		super().__init__(self.lookup, "chorus_")
 
 class Compressor(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"attack": [0.0, 1.0, 0.5],
 			"band_gain": [-30.0, 30.0, 11.7],
@@ -99,13 +92,11 @@ class Compressor(Container):
 			"on": [0.0, 1.0, 0.0, True],
 			"release": [0.0, 1.0, 0.5]
 		}
-
 		super().__init__(self.lookup, "compressor_")
 
 class Delay(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"aux_frequency": [-2.0, 9.0, 2.0],
 			"aux_sync": [0.0, 3.0, 1.0],
@@ -120,13 +111,11 @@ class Delay(Container):
 			"sync": [0.0, 3.0, 1.0],
 			"tempo": [4.0, 12.0, 9.0]
 		}
-
 		super().__init__(self.lookup, "delay_")
 
 class Distortion(Container):
 
 	def __init__(self):
-
 		self.distortion_types = ["soft_clip","hard_clip","linear_fold","sine_fold","bit_crush","down_sample"]
 		self.lookup = {
 			"drive": [-30, 30, 0.0],
@@ -138,13 +127,11 @@ class Distortion(Container):
 			"on": [0.0, 1.0, 0.0, True],
 			"type": [0.0, 5.0, 0.0]
 		}
-
 		super().__init__(self.lookup, "distortion_")
 
 class Filter(Container):
 
 	def __init__(self, num="", lookup=None):
-	
 		self.num = num
 		self.filter_types = {
 			"analog": ["12db", "24db", "notch_blend", "notch_spread", "b_p_n"],
@@ -175,26 +162,20 @@ class Filter(Container):
 			"resonance": [0.0, 1.0, 0.5],
 			"style": [0.0, 0.0, 0.0, True],
 		} if lookup is None else lookup
-
 		super().__init__(self.lookup, prefix="filter_"+num+"_")
 	
 	def set_model(self, model):
 		# The upper model limit is relative to the number of filter styles in a model
 		# So this set function is necessary to update that value each ".set()"
-
 		if type(model) in [int, float]:
 			self.params["model"] = model
 			self.lookup["style"][1] = len(self.filter_types[self.filter_models[int(model)]]) - 1
-
 		elif type(model) == str:
 			self.params["model"] = self.filter_models.index(model)
 			self.lookup["style"][1] = len(self.filter_types[int(model)]) - 1
 
 		if self.is_valid("style") is False:
 			self.params["style"] = self.upper("style")
-
-		print(model, self.get("model"))
-
 
 	def set(self, param, value):
 		# This makes working with filters consistent with the rest of the containers
@@ -208,7 +189,6 @@ class FilterFx(Filter):
 	"""Because for SOME reason, fx filters DONT have FILTER INPUTS"""
 
 	def __init__(self):
-
 		self.lookup = {
 			"blend": [0.0, 2.0, 0.0],
 			"blend_transpose": [0.0, 84.0, 42.0],
@@ -226,13 +206,11 @@ class FilterFx(Filter):
 			"resonance": [0.0, 1.0, 0.5],
 			"style": [0.0, 0.0, 0.0, True],
 		}
-
 		super().__init__("fx", lookup=self.lookup)
 
 class Flanger(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"center": [8.0, 136.0, 64.0],
 			"dry_wet": [0.0, 0.5, 0.5],
@@ -244,13 +222,11 @@ class Flanger(Container):
 			"sync": [0.0, 3.0, 1.0],
 			"tempo": [0.0, 10.0, 4.0]
 		}
-
 		super().__init__(self.lookup, "flanger_")
 
 class Phaser(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"blend": [0.0, 2.0, 1.0],
 			"center": [8.0, 136.0, 80.0],
@@ -263,13 +239,11 @@ class Phaser(Container):
 			"sync": [0.0, 3.0, 1.0],
 			"tempo": [0.0, 10.0, 3.0]
 		}
-
 		super().__init__(self.lookup, "phaser_")
 
 class Reverb(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"chorus_amount": [0.0, 1.0, 0.223607],
 			"chorus_frequency": [-8.0, 3.0, -2.0],
@@ -285,13 +259,11 @@ class Reverb(Container):
 			"pre_low_cutoff": [0.0, 128.0, 0.0],
 			"size": [0.0, 1.0, 0.5]
 		}
-
 		super().__init__(self.lookup, "reverb_")
 
 class Eq(Container):
 
 	def __init__(self):
-
 		self.lookup = {
 			"band_cutoff": [8.0, 136.0, 80.0],
 			"band_gain": [-15.0, 15.0, 0.0],
@@ -307,5 +279,4 @@ class Eq(Container):
 			"low_resonance": [0.0, 1.0, 0.3163],
 			"on": [0.0, 1.0, 0.0, True]
 		}
-
 		super().__init__(self.lookup, "eq_")

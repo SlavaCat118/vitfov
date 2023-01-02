@@ -14,7 +14,6 @@ class RandomLfo(Container):
 			"keytrack_tune":[-1.0, 1.0, 0.0]
 		}
 		self.num = num
-
 		super().__init__(lookup=self.lookup, prefix="random_"+str(self.num)+"_")
 
 

@@ -16,7 +16,6 @@ class MatrixWires(Container):
 		}
 		self.prefix = "modulation_"
 		self.params = {}
-
 		self.initialize()
 
 	def initialize(self):

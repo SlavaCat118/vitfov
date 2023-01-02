@@ -1,5 +1,3 @@
-
-
 def get_loopthrough(keys=None, exclude=None, array=None):
 	exclude = [] if exclude is None else exclude
 	loopthrough = []

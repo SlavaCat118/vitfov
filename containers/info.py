@@ -8,7 +8,6 @@ class Info(object):
 				macro1="MACRO 1", macro2='MACRO 2', macro3="MACRO 3", 
 				macro4="MACRO 4", preset_name="VITFOV_INIT", 
 				preset_style=""):
-
 		self.author = author
 		self.comments = comments
 		self.preset_style = preset_style

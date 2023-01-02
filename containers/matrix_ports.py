@@ -42,15 +42,17 @@ class MatrixPorts(object):
 
 			self.ports[i]["source"] = sources[source_type][random.randrange(0,len(sources[source_type]))]
 			self.ports[i]["destination"] = destinations[dest_type][random.randrange(0,len(destinations[dest_type]))]
-
-
+			if "line_mapping" in self.ports[i]:
+				self.ports[i]["line_mapping"].randomize()
 
 	def translate(self):
 		return self.ports
 
-	def set(port, source, destination):
+	def set(port, source, destination, line_mapping=None):
 		self.ports[port]["source"] = source
 		self.ports[port]["destination"] = destination
+		if line_mapping is not None:
+			self.ports[port]["line_mapping"] = line_mapping
 
 	def get(port):
 		return self.ports[port]
